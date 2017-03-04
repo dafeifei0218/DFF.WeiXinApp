@@ -1,0 +1,41 @@
+﻿@using Senparc.Weixin.Entities
+@using Senparc.Weixin.MP.Entities.Menu
+@using Senparc.Weixin.MP.Helpers
+
+@{
+    ViewBag.Title = "CreateMenu";
+    WxJsonResult wxJsonResult = ViewBag.WxJsonResult as WxJsonResult;
+    
+    List<ConditionalButtonGroup> ConditionalButtonGroupList = ViewData["ConditionalMenu"] as List<ConditionalButtonGroup>;
+    var ButtonGroupBase = ViewData["Menu"] as ButtonGroupBase;
+}
+
+<h2>CreateMenu</h2>
+<div>
+    accessToken：@ViewBag.accessToken
+</div>
+<div>
+    @wxJsonResult.ConvertEntityToXmlString();s
+</div>
+<div>
+    ConditionalMenu：
+    @{
+        foreach (var conditionalButtonGroup in ConditionalButtonGroupList)
+        {
+            foreach (var baseButton in conditionalButtonGroup.button)
+            {
+                <span>baseButton.name</span>
+            }
+        }
+    }
+</div>
+
+<div>
+    Menu：
+    @{
+        foreach (var baseButton in ButtonGroupBase.button)
+        {
+            <span>baseButton.name</span>
+        }
+    }
+</div>
