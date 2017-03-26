@@ -17,12 +17,17 @@ namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
             base.MessageContextRemoved += CustomMessageContext_MessageContextRemoved;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomMessageContext_MessageContextRemoved(object sender, WeixinContextRemovedEventArgs<IRequestMessageBase, IResponseMessageBase> e)
         {
             var messageContext = e.MessageContext as CustomMessageContext;
             if (messageContext == null)
             {
-                return; //
+                return; //如果是正常的调用，messageContext不会为null
             }
         }
 

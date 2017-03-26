@@ -12,8 +12,16 @@ using Senparc.Weixin.MP.MessageHandlers;
 
 namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
 {
+    /// <summary>
+    /// 自定义消息处理
+    /// </summary>
     public class CustomMessageHandler: MessageHandler<CustomMessageContext>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputStream"></param>
+        /// <param name="postModel"></param>
         public CustomMessageHandler(Stream inputStream, PostModel postModel) 
             : base(inputStream, postModel)
         {

@@ -3,9 +3,9 @@
 @using Senparc.Weixin.MP.Helpers
 
 @{
-    ViewBag.Title = "CreateMenu";
+    ViewBag.Title = "创建菜单";
     WxJsonResult wxJsonResult = ViewBag.WxJsonResult as WxJsonResult;
-    
+
     List<ConditionalButtonGroup> ConditionalButtonGroupList = ViewData["ConditionalMenu"] as List<ConditionalButtonGroup>;
     var ButtonGroupBase = ViewData["Menu"] as ButtonGroupBase;
 }
@@ -15,7 +15,7 @@
     accessToken：@ViewBag.accessToken
 </div>
 <div>
-    @wxJsonResult.ConvertEntityToXmlString();s
+    @wxJsonResult.ConvertEntityToXmlString();
 </div>
 <div>
     ConditionalMenu：

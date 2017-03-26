@@ -59,6 +59,7 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
             string token = ConfigurationManager.AppSettings["Token"].ToString();
             string encodingAEKey = ConfigurationManager.AppSettings["EncodingAESKey"].ToString();
             string appId = ConfigurationManager.AppSettings["AppId"].ToString();
+
             if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))
             {
                 return Content("参数错误！");
@@ -72,78 +73,6 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
             messageHandler.Execute();
 
             return new FixWeixinBugWeixinResult(messageHandler);
-        }
-
-        #endregion
-
-        #region 创建菜单
-
-        /// <summary>
-        /// 创建菜单
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult CreateMenu()
-        {
-            string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-            string appSecret = ConfigurationManager.AppSettings["AppSecret"].ToString();
-
-            var accessToken = AccessTokenContainer.TryGetAccessToken(appId, appSecret);
-
-            ButtonGroup buttonGroup = new ButtonGroup();
-
-            //单击
-            buttonGroup.button.Add(new SingleClickButton()
-            {
-                key = "单击测试",
-                name = "OneClick",
-                type = ButtonType.click.ToString()
-            });
-
-            //二级菜单
-            var subButton = new SubButton()
-            {
-                name = "二级菜单"
-            };
-
-            subButton.sub_button.Add(new SingleClickButton()
-            {
-                key = "SubClickRoot_Text",
-                name = "返回文本"
-            });
-            subButton.sub_button.Add(new SingleClickButton()
-            {
-                key = "SubClickRoot_News",
-                name = "返回图文"
-            });
-            subButton.sub_button.Add(new SingleClickButton()
-            {
-                key = "SubClickRoot_Music",
-                name = "返回音乐"
-            });
-            subButton.sub_button.Add(new SingleClickButton()
-            {
-                key = "http://www.baidu.com",
-                name = "Url跳转"
-            });
-
-            buttonGroup.button.Add(subButton);
-
-            //提交到微信服务器
-            var result01 = CommonApi.CreateMenu(accessToken, buttonGroup);
-
-            //查询菜单
-            var result02 = CommonApi.GetMenu(accessToken);
-
-            //删除菜单
-            //var result03 = CommonApi.DeleteMenu(accessToken);
-
-            ViewBag.accessToken = accessToken;
-            ViewBag.WxJsonResult = result01;
-
-            ViewData["ConditionalMenu"] = result02.conditionalmenu;
-            ViewData["Menu"] = result02.menu;
-
-            return View();
         }
 
         #endregion
