@@ -23,6 +23,10 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
         //public static readonly string EncodingAESKey = "YourKey";//与微信公众账号后台的EncodingAESKey设置保持一致，区分大小写。
         //public static readonly string AppId = "YourAppId";//与微信公众账号后台的AppId设置保持一致，区分大小写。
 
+        public static readonly string Token = ConfigurationManager.AppSettings["Token"].ToString();
+        public static readonly string EncodingAESKey = ConfigurationManager.AppSettings["EncodingAESKey"].ToString();
+        public static readonly string AppId = ConfigurationManager.AppSettings["AppId"].ToString();
+
         /// <summary>
         /// 微信后台验证地址（使用Get），微信后台的“接口配置信息”的Url填写如：http://weixin.senparc.com/weixin
         /// </summary>
@@ -32,7 +36,7 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
         [HttpGet]
         [ActionName("Index")]
         //public ActionResult Index(string signature, string timestamp, string nonce, string echostr)
-        public ActionResult Index(PostModel postModel, string echostr)
+        public ActionResult Get(PostModel postModel, string echostr)
         {
             string token = ConfigurationManager.AppSettings["Token"].ToString();
 
@@ -56,23 +60,21 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
         [ActionName("Index")]
         public ActionResult Post(PostModel postModel)
         {
-            string token = ConfigurationManager.AppSettings["Token"].ToString();
-            string encodingAEKey = ConfigurationManager.AppSettings["EncodingAESKey"].ToString();
-            string appId = ConfigurationManager.AppSettings["AppId"].ToString();
-
-            if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))
+            if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, Token))
             {
                 return Content("参数错误！");
             }
 
-            postModel.Token = token;
-            postModel.EncodingAESKey = encodingAEKey;
-            postModel.AppId = appId;
+            postModel.Token = Token;
+            postModel.EncodingAESKey = EncodingAESKey;
+            postModel.AppId = AppId;
 
-            var messageHandler = new CustomMessageHandler(Request.InputStream, postModel);
-            messageHandler.Execute();
+            //自定义MessageHandler，对微信请求的详细判断操作都在这里面。
+            var messageHandler = new CustomMessageHandler(Request.InputStream, postModel); //接收消息
 
-            return new FixWeixinBugWeixinResult(messageHandler);
+            messageHandler.Execute(); //执行微信处理过程
+
+            return new FixWeixinBugWeixinResult(messageHandler); //返回结果
         }
 
         #endregion

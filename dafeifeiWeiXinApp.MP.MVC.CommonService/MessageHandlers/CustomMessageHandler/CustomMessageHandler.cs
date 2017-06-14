@@ -18,15 +18,20 @@ namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
     public class CustomMessageHandler: MessageHandler<CustomMessageContext>
     {
         /// <summary>
-        /// 
+        /// 构造函数
         /// </summary>
         /// <param name="inputStream"></param>
-        /// <param name="postModel"></param>
+        /// <param name="postModel">模型</param>
         public CustomMessageHandler(Stream inputStream, PostModel postModel) 
             : base(inputStream, postModel)
         {
         }
 
+        /// <summary>
+        /// 默认返回消息
+        /// </summary>
+        /// <param name="requestMessage">请求消息</param>
+        /// <returns></returns>
         public override IResponseMessageBase DefaultResponseMessage(IRequestMessageBase requestMessage)
         {
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>(); //ResponseMessageText也可以是News等其他类型
@@ -34,6 +39,11 @@ namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
             return responseMessage;
         }
 
+        /// <summary>
+        /// 文字类型请求
+        /// </summary>
+        /// <param name="requestMessage"></param>
+        /// <returns></returns>
         public override IResponseMessageBase OnTextRequest(RequestMessageText requestMessage)
         {
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>(); //ResponseMessageText也可以是News等其他类型

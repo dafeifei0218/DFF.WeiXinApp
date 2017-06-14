@@ -12,13 +12,16 @@ namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
     /// </summary>
     public class CustomMessageContext : MessageContext<IRequestMessageBase, IResponseMessageBase>
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CustomMessageContext()
         {
             base.MessageContextRemoved += CustomMessageContext_MessageContextRemoved;
         }
 
         /// <summary>
-        /// 
+        /// 当MessageContext被删除时触发的事件。（当上下文过期，被移除时触发的事件） 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
