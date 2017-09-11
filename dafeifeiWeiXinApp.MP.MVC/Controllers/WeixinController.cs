@@ -5,27 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Containers;
 using Senparc.Weixin.MP.Entities.Menu;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MvcExtension;
+using DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler;
 
 namespace DFF.WeiXinApp.MP.MVC.Controllers
 {
+    /// <summary>
+    /// 微信控制器
+    /// </summary>
     public class WeixinController : Controller
     {
         #region 验证登录
 
-        //public static readonly string Token = "YourToken";//与微信公众账号后台的Token设置保持一致，区分大小写。
-        //public static readonly string EncodingAESKey = "YourKey";//与微信公众账号后台的EncodingAESKey设置保持一致，区分大小写。
-        //public static readonly string AppId = "YourAppId";//与微信公众账号后台的AppId设置保持一致，区分大小写。
+        //public static readonly string Token = "YourToken";
+        //public static readonly string EncodingAESKey = "YourKey";
+        //public static readonly string AppId = "YourAppId";
 
-        public static readonly string Token = ConfigurationManager.AppSettings["Token"].ToString();
-        public static readonly string EncodingAESKey = ConfigurationManager.AppSettings["EncodingAESKey"].ToString();
-        public static readonly string AppId = ConfigurationManager.AppSettings["AppId"].ToString();
+        public static readonly string Token = ConfigurationManager.AppSettings["Token"].ToString(); //与微信公众账号后台的Token设置保持一致，区分大小写。
+        public static readonly string EncodingAESKey = ConfigurationManager.AppSettings["EncodingAESKey"].ToString(); //与微信公众账号后台的EncodingAESKey设置保持一致，区分大小写。
+        public static readonly string AppId = ConfigurationManager.AppSettings["AppId"].ToString(); //与微信公众账号后台的AppId设置保持一致，区分大小写。
 
         /// <summary>
         /// 微信后台验证地址（使用Get），微信后台的“接口配置信息”的Url填写如：http://weixin.senparc.com/weixin

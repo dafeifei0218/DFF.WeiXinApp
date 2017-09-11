@@ -6,7 +6,7 @@
     ViewBag.Title = "创建菜单";
     WxJsonResult wxJsonResult = ViewBag.WxJsonResult as WxJsonResult;
 
-    List<ConditionalButtonGroup> ConditionalButtonGroupList = ViewData["ConditionalMenu"] as List<ConditionalButtonGroup>;
+    //List<ConditionalButtonGroup> ConditionalButtonGroupList = ViewData["ConditionalMenu"] as List<ConditionalButtonGroup>;
     var ButtonGroupBase = ViewData["Menu"] as ButtonGroupBase;
 }
 
@@ -18,7 +18,7 @@
     @wxJsonResult.ConvertEntityToXmlString();
 </div>
 <div>
-    ConditionalMenu：
+    @*ConditionalMenu查询菜单：
     @{
         foreach (var conditionalButtonGroup in ConditionalButtonGroupList)
         {
@@ -27,11 +27,11 @@
                 <span>baseButton.name</span>
             }
         }
-    }
+    }*@
 </div>
-
+/***********************************************************************/
 <div>
-    Menu：
+    Menu 菜单：
     @{
         foreach (var baseButton in ButtonGroupBase.button)
         {

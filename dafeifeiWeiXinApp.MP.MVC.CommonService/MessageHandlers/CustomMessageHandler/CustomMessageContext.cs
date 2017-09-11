@@ -33,7 +33,5 @@ namespace DFF.WeiXinApp.MP.MVC.CommonService.CustomMessageHandler
                 return; //如果是正常的调用，messageContext不会为null
             }
         }
-
-
     }
 }

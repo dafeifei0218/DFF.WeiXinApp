@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -181,7 +182,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Weixin\Index.cshtml" />
-    <Content Include="Views\Menu\CreateMenu.cshtml" />
+    <Content Include="Views\Menu\CreateMenuDefault.cshtml" />
     <Content Include="Views\Weixin\ErWeiCode.cshtml" />
   </ItemGroup>
   <ItemGroup>

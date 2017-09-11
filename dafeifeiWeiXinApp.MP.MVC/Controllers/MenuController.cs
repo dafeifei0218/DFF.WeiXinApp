@@ -40,7 +40,6 @@ namespace DFF.WeiXinApp.MP.MVC.Controllers
         /// <returns></returns>
         public ActionResult CreateMenuDefault()
         {
-
             var accessToken = AccessTokenContainer.TryGetAccessToken(appId, appSecret);
 
             ButtonGroup buttonGroup = new ButtonGroup();
